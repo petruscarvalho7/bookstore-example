@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupDependencyContainer()
+
         return true
     }
 
@@ -79,3 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+private extension AppDelegate {
+    
+    // Dependency Injection to API services
+    func setupDependencyContainer() {
+        ServiceContainer.register(type: BookStoreAPILogic.self, BookStoreAPI())
+    }
+}

@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  BookStore
+
+  Created by Petrus Carvalho on 05/06/23.
+  
+*/
+
+"bookStore.title.app" = "Livraria";
+"bookStore.title" = "Título:";
+"bookStore.author" = "Autor:";
+"bookStore.description" = "Descrição:";
+"bookStore.available" = "Disponível:";
+"bookStore.buyLink" = "Link:";
+"bookStore.errors.loading.title" = "Error Titulo";
+"bookStore.errors.loading.desc" = "Error Desc";
+"bookStore.list.empty.title" = "List Vazia Title";
+"bookStore.list.empty.desc" = "List Vazia Desc";
+"pull-to-refresh" = "Pull to refresh";
+"loading.hud.title" = "Loading";
+"loading.hud.subtitle" = "schools";
