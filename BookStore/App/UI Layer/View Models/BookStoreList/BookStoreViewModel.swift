@@ -49,9 +49,7 @@ class BookStoreViewModel {
     
     func removeSavedBook(book: BookStore) {
         if let index = savedBooks.firstIndex(where: { $0.id == book.id }) {
-            print(index)
             savedBooks.remove(at: index)
-            print(savedBooks)
         }
     }
 }

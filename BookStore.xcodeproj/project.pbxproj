@@ -420,13 +420,13 @@
 		F4084C602A2F8FA2009868FB /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				F4084C632A2F9382009868FB /* ClassesProperties */,
+				F4084C632A2F9382009868FB /* CoreDataClassProperties */,
 				F4084C612A2F9180009868FB /* DataManager.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		F4084C632A2F9382009868FB /* ClassesProperties */ = {
+		F4084C632A2F9382009868FB /* CoreDataClassProperties */ = {
 			isa = PBXGroup;
 			children = (
 				F4084C642A2F9396009868FB /* BookStoreData+CoreDataClass.swift */,
@@ -438,7 +438,7 @@
 				F4084C702A2F97FB009868FB /* ImageLinksData+CoreDataClass.swift */,
 				F4084C722A2F981D009868FB /* ImageLinksData+CoreDataProperties.swift */,
 			);
-			path = ClassesProperties;
+			path = CoreDataClassProperties;
 			sourceTree = "<group>";
 		};
 		F4084C742A2FAE0D009868FB /* BookStoreList */ = {

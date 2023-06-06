@@ -25,7 +25,7 @@ extension UIImageView {
             
             if let httpResponse = response as? HTTPURLResponse{
                 if httpResponse.statusCode == 200 {
-                    print("Fetched image successfully")
+                    print("image download complete.")
                 }
             }
             // Loading the image here
