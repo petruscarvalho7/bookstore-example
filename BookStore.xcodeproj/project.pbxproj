@@ -40,7 +40,7 @@
 		F4084C492A2E6809009868FB /* BookStoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C482A2E6809009868FB /* BookStoreCollectionViewCell.swift */; };
 		F4084C4B2A2E74EE009868FB /* BookStoreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C4A2A2E74EE009868FB /* BookStoreList.swift */; };
 		F4084C4D2A2E7A1E009868FB /* UILabelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C4C2A2E7A1E009868FB /* UILabelHelper.swift */; };
-		F4084C4F2A2E7D0C009868FB /* UIImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C4E2A2E7D0C009868FB /* UIImageHelper.swift */; };
+		F4084C4F2A2E7D0C009868FB /* UIImageViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C4E2A2E7D0C009868FB /* UIImageViewHelper.swift */; };
 		F4084C512A2E7D93009868FB /* ImageLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C502A2E7D93009868FB /* ImageLinks.swift */; };
 		F4084C532A2F47D5009868FB /* BookStoreDetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C522A2F47D5009868FB /* BookStoreDetailCollectionViewController.swift */; };
 		F4084C552A2F4927009868FB /* BookStoreDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4084C542A2F4927009868FB /* BookStoreDetailViewCell.swift */; };
@@ -121,7 +121,7 @@
 		F4084C482A2E6809009868FB /* BookStoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4084C4A2A2E74EE009868FB /* BookStoreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreList.swift; sourceTree = "<group>"; };
 		F4084C4C2A2E7A1E009868FB /* UILabelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelHelper.swift; sourceTree = "<group>"; };
-		F4084C4E2A2E7D0C009868FB /* UIImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
+		F4084C4E2A2E7D0C009868FB /* UIImageViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewHelper.swift; sourceTree = "<group>"; };
 		F4084C502A2E7D93009868FB /* ImageLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLinks.swift; sourceTree = "<group>"; };
 		F4084C522A2F47D5009868FB /* BookStoreDetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailCollectionViewController.swift; sourceTree = "<group>"; };
 		F4084C542A2F4927009868FB /* BookStoreDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailViewCell.swift; sourceTree = "<group>"; };
@@ -297,8 +297,8 @@
 		F4084C172A2E181E009868FB /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				F4084C422A2E5D6E009868FB /* BookStoreViewModel.swift */,
-				F4084C582A2F577A009868FB /* BookStoreDetailViewModel.swift */,
+				F4084C792A2FAE5E009868FB /* BookStoreDetail */,
+				F4084C782A2FAE54009868FB /* BookStoreList */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -314,11 +314,8 @@
 		F4084C192A2E1856009868FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F4084C442A2E64E2009868FB /* BookStoreListStateView.swift */,
-				F4084C482A2E6809009868FB /* BookStoreCollectionViewCell.swift */,
-				F4084C542A2F4927009868FB /* BookStoreDetailViewCell.swift */,
-				F4084C562A2F4939009868FB /* BookStoreDetailButtonsViewCell.swift */,
-				F4084C5C2A2F5E61009868FB /* BookStoreSectionHeaderView.swift */,
+				F4084C772A2FAE44009868FB /* BookStoreDetail */,
+				F4084C762A2FAE37009868FB /* BookStoreList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,8 +323,8 @@
 		F4084C1A2A2E1868009868FB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F4084BE32A2E1538009868FB /* BookStoreCollectionViewController.swift */,
-				F4084C522A2F47D5009868FB /* BookStoreDetailCollectionViewController.swift */,
+				F4084C752A2FAE25009868FB /* BookStoreDetail */,
+				F4084C742A2FAE0D009868FB /* BookStoreList */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -414,7 +411,7 @@
 			children = (
 				F4084C402A2E5BD6009868FB /* StringHelper.swift */,
 				F4084C4C2A2E7A1E009868FB /* UILabelHelper.swift */,
-				F4084C4E2A2E7D0C009868FB /* UIImageHelper.swift */,
+				F4084C4E2A2E7D0C009868FB /* UIImageViewHelper.swift */,
 				F4084C5E2A2F642B009868FB /* UIButtonHelper.swift */,
 			);
 			path = Lib;
@@ -442,6 +439,57 @@
 				F4084C722A2F981D009868FB /* ImageLinksData+CoreDataProperties.swift */,
 			);
 			path = ClassesProperties;
+			sourceTree = "<group>";
+		};
+		F4084C742A2FAE0D009868FB /* BookStoreList */ = {
+			isa = PBXGroup;
+			children = (
+				F4084BE32A2E1538009868FB /* BookStoreCollectionViewController.swift */,
+			);
+			path = BookStoreList;
+			sourceTree = "<group>";
+		};
+		F4084C752A2FAE25009868FB /* BookStoreDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F4084C522A2F47D5009868FB /* BookStoreDetailCollectionViewController.swift */,
+			);
+			path = BookStoreDetail;
+			sourceTree = "<group>";
+		};
+		F4084C762A2FAE37009868FB /* BookStoreList */ = {
+			isa = PBXGroup;
+			children = (
+				F4084C442A2E64E2009868FB /* BookStoreListStateView.swift */,
+				F4084C482A2E6809009868FB /* BookStoreCollectionViewCell.swift */,
+			);
+			path = BookStoreList;
+			sourceTree = "<group>";
+		};
+		F4084C772A2FAE44009868FB /* BookStoreDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F4084C542A2F4927009868FB /* BookStoreDetailViewCell.swift */,
+				F4084C562A2F4939009868FB /* BookStoreDetailButtonsViewCell.swift */,
+				F4084C5C2A2F5E61009868FB /* BookStoreSectionHeaderView.swift */,
+			);
+			path = BookStoreDetail;
+			sourceTree = "<group>";
+		};
+		F4084C782A2FAE54009868FB /* BookStoreList */ = {
+			isa = PBXGroup;
+			children = (
+				F4084C422A2E5D6E009868FB /* BookStoreViewModel.swift */,
+			);
+			path = BookStoreList;
+			sourceTree = "<group>";
+		};
+		F4084C792A2FAE5E009868FB /* BookStoreDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F4084C582A2F577A009868FB /* BookStoreDetailViewModel.swift */,
+			);
+			path = BookStoreDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -721,7 +769,7 @@
 				F4084BEA2A2E1538009868FB /* BookStore.xcdatamodeld in Sources */,
 				F4084BE22A2E1538009868FB /* SceneDelegate.swift in Sources */,
 				F4084C4D2A2E7A1E009868FB /* UILabelHelper.swift in Sources */,
-				F4084C4F2A2E7D0C009868FB /* UIImageHelper.swift in Sources */,
+				F4084C4F2A2E7D0C009868FB /* UIImageViewHelper.swift in Sources */,
 				F4084C5B2A2F582B009868FB /* BookStoreDetailSection.swift in Sources */,
 				F4084C2B2A2E538B009868FB /* BookStoreDirectoryAPI.swift in Sources */,
 				F4084C2F2A2E5716009868FB /* BookStoreVolumeInfo.swift in Sources */,
