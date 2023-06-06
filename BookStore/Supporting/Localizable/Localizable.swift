@@ -27,9 +27,9 @@ enum Localizable {
     static var bookStoreListEmptyDesc: String { "bookStore.list.empty.desc".localized() }
     
     // Pull to refresh
-    static var schoolPullToRefresh: String { "pull-to-refresh".localized() }
+    static var bookStorePullToRefresh: String { "pull-to-refresh".localized() }
     
     // HUD
-    static var schoolLoadingHUDTitle: String { "loading.hud.title".localized() }
-    static var schoolLoadingHUDSubTitle: String { "loading.hud.subtitle".localized() }
+    static var bookStoreLoadingHUDTitle: String { "loading.hud.title".localized() }
+    static var bookStoreLoadingHUDSubTitle: String { "loading.hud.subtitle".localized() }
 }

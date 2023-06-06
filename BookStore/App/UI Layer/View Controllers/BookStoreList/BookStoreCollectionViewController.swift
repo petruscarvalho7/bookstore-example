@@ -40,7 +40,7 @@ class BookStoreCollectionViewController: UIViewController {
         setupCollectionView()
         setupBinders()
         setupLoadinHUD()
-        retrieveSchoolData()
+        retrieveBookStoreData()
         setupRefreshControll()
         
         booksData = DataManager.shared.books()
@@ -148,13 +148,13 @@ class BookStoreCollectionViewController: UIViewController {
         }
         loadingHUD = MBProgressHUD.showAdded(to: collectionView,
                                              animated: true)
-        loadingHUD?.label.text = Localizable.schoolLoadingHUDTitle
+        loadingHUD?.label.text = Localizable.bookStoreLoadingHUDTitle
         loadingHUD?.isUserInteractionEnabled = false
-        loadingHUD?.detailsLabel.text = Localizable.schoolLoadingHUDSubTitle
+        loadingHUD?.detailsLabel.text = Localizable.bookStoreLoadingHUDSubTitle
     }
     
     private func setupRefreshControll() {
-        refreshControll.attributedTitle = NSAttributedString(string: Localizable.schoolPullToRefresh)
+        refreshControll.attributedTitle = NSAttributedString(string: Localizable.bookStorePullToRefresh)
         refreshControll.addTarget(self,
                                   action: #selector(refresh),
                                   for: .valueChanged)
@@ -162,7 +162,7 @@ class BookStoreCollectionViewController: UIViewController {
     }
     
     @objc private func refresh() {
-        retrieveSchoolData(withPagination: true)
+        retrieveBookStoreData(withPagination: true)
         refreshControll.endRefreshing()
     }
     
@@ -178,7 +178,7 @@ class BookStoreCollectionViewController: UIViewController {
         self.collectionView?.reloadData()
     }
     
-    private func retrieveSchoolData(withPagination: Bool = false) {
+    private func retrieveBookStoreData(withPagination: Bool = false) {
         removeStateView()
         loadingHUD?.show(animated: true)
         withPagination ? bookViewModel.getBooks() : bookViewModel.getBooks(page: "0")

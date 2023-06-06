@@ -164,7 +164,9 @@ class BookStoreDetailViewCell: UICollectionViewCell {
         }
         if let available = book?.saleInfo.saleability {
             let forSale: Bool = available == .forSale
-            availableValueLabel.text = forSale ? Localizable.bookStoreDetailsAvailableText : Localizable.bookStoreDetailsSoldOutText
+            availableValueLabel.text = forSale ?
+                Localizable.bookStoreDetailsAvailableText :
+                Localizable.bookStoreDetailsSoldOutText
             availableValueLabel.textColor = forSale ? .green : .red
         }
         if let buyLink = book?.saleInfo.buyLink {

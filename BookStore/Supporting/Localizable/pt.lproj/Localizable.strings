@@ -20,4 +20,4 @@
 "bookStore.list.empty.desc" = "List Vazia Desc";
 "pull-to-refresh" = "Pull to refresh";
 "loading.hud.title" = "Loading";
-"loading.hud.subtitle" = "schools";
+"loading.hud.subtitle" = "livros";

@@ -10,13 +10,11 @@ import Alamofire
 
 typealias BookStoreListAPIResponse = (Swift.Result<[BookStore]?, DataError>) -> Void
 
-/// API interface to retrieve schools
 protocol BookStoreAPILogic {
     func getBooks(page: String, completion: @escaping (BookStoreListAPIResponse))
 }
 
 class BookStoreAPI: BookStoreAPILogic {
-    /// NYC School API URL returning list of schools with details
     private struct Constants {
         static let baseURL = BuildConfiguration.shared.baseURL
         static let booksListURL = "volumes?q=ios&maxResults=20&startIndex="
