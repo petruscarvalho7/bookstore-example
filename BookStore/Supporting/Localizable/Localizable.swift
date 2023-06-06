@@ -17,6 +17,8 @@ enum Localizable {
     static var bookStoreDetailsDescription: String { "bookStore.description".localized() }
     static var bookStoreDetailsAvailable: String { "bookStore.available".localized() }
     static var bookStoreDetailsBuyLink: String { "bookStore.buyLink".localized() }
+    static var bookStoreDetailsAvailableText: String { "bookStore.available.text".localized() }
+    static var bookStoreDetailsSoldOutText: String { "bookStore.soldOut.text".localized() }
     
     // Errors
     static var bookStoreErrorsLoadingTitle: String { "bookStore.errors.loading.title".localized() }

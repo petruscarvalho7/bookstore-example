@@ -99,15 +99,7 @@ class BookStoreCollectionViewController: UIViewController {
             
     }
     
-    private func setupCollectionView() {
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: Constants.cellHeight)
-        collectionViewLayout.headerReferenceSize = CGSize(width: view.frame.size.width, height: Constants.sectionHeight)
-        collectionViewLayout.scrollDirection = .vertical
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: collectionViewLayout)
-        
-        guard let collectionView = collectionView else { return }
-        
+    fileprivate func setupSegmentControl() {
         let mySegmentedControl = UISegmentedControl (items: ["Show","Filter"])
         
         let xPostion:CGFloat = 10
@@ -126,6 +118,18 @@ class BookStoreCollectionViewController: UIViewController {
         mySegmentedControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
         
         view.addSubview(mySegmentedControl)
+    }
+    
+    private func setupCollectionView() {
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: Constants.cellHeight)
+        collectionViewLayout.headerReferenceSize = CGSize(width: view.frame.size.width, height: Constants.sectionHeight)
+        collectionViewLayout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: collectionViewLayout)
+        
+        setupSegmentControl()
+        
+        guard let collectionView = collectionView else { return }
         
         view.addSubview(collectionView)
         collectionView.autoPinEdgesToSuperviewEdges(with: Constants.collectionViewInsets)

@@ -11,14 +11,15 @@ extension UIButton {
     
     static func btnFooter(_ name: String? = nil) -> UIButton {
         let btn = UIButton()
-        btn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        btn.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
 
         if let name = name {
             btn.setImage(UIImage(named: name), for: .normal)
             btn.imageView?.contentMode = .scaleAspectFit
+                                                                  
         }
         btn.backgroundColor = .white
-        btn.layer.cornerRadius = 20
+        btn.layer.cornerRadius = 32
         btn.clipsToBounds = true
         
         //shadow

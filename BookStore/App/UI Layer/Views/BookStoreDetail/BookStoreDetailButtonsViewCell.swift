@@ -12,7 +12,7 @@ class BookStoreDetailButtonsViewCell: UICollectionViewCell {
     private struct Constants {
         static let topInset: CGFloat = 10
         static let rightInset: CGFloat = 10
-        static let btnViewInsets = UIEdgeInsets(top: 0, left: 250, bottom: 0, right: 10)
+        static let btnViewInsets = UIEdgeInsets(top: 10, left: 300, bottom: 10, right: 10)
     }
     
     var isChecked: Bool = false

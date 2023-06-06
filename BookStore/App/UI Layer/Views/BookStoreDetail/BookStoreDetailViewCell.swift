@@ -25,6 +25,7 @@ class BookStoreDetailViewCell: UICollectionViewCell {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -51,6 +52,7 @@ class BookStoreDetailViewCell: UICollectionViewCell {
     private var descValueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -78,6 +80,7 @@ class BookStoreDetailViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
         label.numberOfLines = 4
+        label.textColor = .blue
         return label
     }()
     
@@ -126,6 +129,10 @@ class BookStoreDetailViewCell: UICollectionViewCell {
         stackView.autoPinEdge(toSuperviewEdge: .top, withInset: Constants.topInset)
         stackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: Constants.bottomInset)
         
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .top
+        stackView.distribution = .equalSpacing
+        
         stackView.addArrangedSubview(titleLabel)
         
         stackView.addArrangedSubview(authorsLabel)
@@ -157,7 +164,7 @@ class BookStoreDetailViewCell: UICollectionViewCell {
         }
         if let available = book?.saleInfo.saleability {
             let forSale: Bool = available == .forSale
-            availableValueLabel.text = forSale ? "Available" : "Sold-Out"
+            availableValueLabel.text = forSale ? Localizable.bookStoreDetailsAvailableText : Localizable.bookStoreDetailsSoldOutText
             availableValueLabel.textColor = forSale ? .green : .red
         }
         if let buyLink = book?.saleInfo.buyLink {
@@ -165,6 +172,8 @@ class BookStoreDetailViewCell: UICollectionViewCell {
             buyLinkValueLabel.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleLink))
             buyLinkValueLabel.addGestureRecognizer(tap)
+        } else {
+            buyLinkLabel.text = ""
         }
     }
     

@@ -22,8 +22,8 @@ class BookStoreDetailCollectionViewController: UIViewController {
     struct Constants {
         static let cellIdentifier: String = "bookDetailCell"
         static let cellButtonIdentifier: String = "bookDetailButtonCell"
-        static let cellHeight: CGFloat = 240
-        static let cellButtomHeight: CGFloat = 64
+        static let cellHeight: CGFloat = 480
+        static let cellButtomHeight: CGFloat = 80
         static let sectionHeaderIdentifier: String = "sectionHeader"
         static let sectionHeight: CGFloat = 50
     }

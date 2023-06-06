@@ -12,6 +12,8 @@
 "bookStore.description" = "Descrição:";
 "bookStore.available" = "Disponível:";
 "bookStore.buyLink" = "Link:";
+"bookStore.available.text" = "Disponível";
+"bookStore.soldOut.text" = "Esgotado";
 "bookStore.errors.loading.title" = "Error Titulo";
 "bookStore.errors.loading.desc" = "Error Desc";
 "bookStore.list.empty.title" = "List Vazia Title";
