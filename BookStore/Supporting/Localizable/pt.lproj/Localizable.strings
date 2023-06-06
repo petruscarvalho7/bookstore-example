@@ -7,8 +7,8 @@
 */
 
 "bookStore.title.app" = "Livraria";
-"bookStore.title" = "Título:";
-"bookStore.author" = "Autor:";
+"bookStore.title" = "Detalhes";
+"bookStore.author" = "Autores:";
 "bookStore.description" = "Descrição:";
 "bookStore.available" = "Disponível:";
 "bookStore.buyLink" = "Link:";

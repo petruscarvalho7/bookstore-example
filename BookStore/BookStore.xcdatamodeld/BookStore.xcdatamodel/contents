@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BookStoreData" representedClassName="BookStoreData" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <relationship name="saleInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SaleInfoData"/>
+        <relationship name="volumeInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VolumeInfoData"/>
+    </entity>
+    <entity name="ImageLinksData" representedClassName="ImageLinksData" syncable="YES">
+        <attribute name="smallThumbnail" optional="YES" attributeType="String"/>
+        <attribute name="thumbnail" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SaleInfoData" representedClassName="SaleInfoData" syncable="YES">
+        <attribute name="buyLink" optional="YES" attributeType="String"/>
+        <attribute name="saleability" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="VolumeInfoData" representedClassName="VolumeInfoData" syncable="YES">
+        <attribute name="authors" optional="YES" attributeType="String"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="imageLinks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageLinksData"/>
+    </entity>
 </model>

@@ -9,6 +9,14 @@ import UIKit
 import Combine
 import PureLayout
 import MBProgressHUD
+import CoreData
+
+var booksData = [BookStoreData]()
+
+protocol BookStoreCollectionDelegate {
+    func addSavedBook(book: BookStore)
+    func removeSavedBook(book: BookStore)
+}
 
 class BookStoreCollectionViewController: UIViewController {
     
@@ -35,7 +43,15 @@ class BookStoreCollectionViewController: UIViewController {
         retrieveSchoolData()
         setupRefreshControll()
         
+        booksData = DataManager.shared.books()
+        
         self.title = Localizable.bookStoreAppTitle
+    }
+    
+    private func reloadDataAndRemoveStates() {
+        self.loadingHUD?.hide(animated: true)
+        self.removeStateView()
+        self.collectionView?.reloadData()
     }
     
     private func setupBinders() {
@@ -45,9 +61,7 @@ class BookStoreCollectionViewController: UIViewController {
                 if books.isEmpty {
                     self.showEmptyState()
                 } else {
-                    self.loadingHUD?.hide(animated: true)
-                    self.removeStateView()
-                    self.collectionView?.reloadData()
+                    self.reloadDataAndRemoveStates()
                 }
             }
             .store(in: &cancelables)
@@ -57,10 +71,13 @@ class BookStoreCollectionViewController: UIViewController {
             .sink { savedBooks in
                 if savedBooks.isEmpty {
                     self.showEmptyState()
+                    let booksCodeData = DataManager.shared.getBookStores()
+                    if !booksCodeData.isEmpty {
+                        self.bookViewModel.setSavedBooks(books: booksCodeData)
+                        self.reloadDataAndRemoveStates()
+                    }
                 } else {
-                    self.loadingHUD?.hide(animated: true)
-                    self.removeStateView()
-                    self.collectionView?.reloadData()
+                    self.reloadDataAndRemoveStates()
                 }
             }
             .store(in: &cancelables)
@@ -146,17 +163,15 @@ class BookStoreCollectionViewController: UIViewController {
     }
     
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
-        let oldSelected = isBooksSelected
         isBooksSelected = sender.selectedSegmentIndex == 0
-        if (isBooksSelected != oldSelected) {
-            self.collectionView?.reloadData()
-        }
         
         if (isBooksSelected && bookViewModel.books.isEmpty) {
             self.showEmptyState()
         } else if (!isBooksSelected && bookViewModel.savedBooks.isEmpty) {
             self.showEmptyState()
         }
+
+        self.collectionView?.reloadData()
     }
     
     private func retrieveSchoolData(withPagination: Bool = false) {
@@ -174,8 +189,7 @@ extension BookStoreCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier, for: indexPath) as? BookStoreCollectionViewCell else { return UICollectionViewCell() }
         
-        
-        cell.populate(bookViewModel.books[indexPath.item])
+        cell.populate(isBooksSelected ? bookViewModel.books[indexPath.item] : bookViewModel.savedBooks[indexPath.item])
         
         return cell
     }
@@ -194,20 +208,12 @@ extension BookStoreCollectionViewController: UICollectionViewDataSource {
 extension BookStoreCollectionViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(bookViewModel.books[indexPath.item].volumeInfo.title)
-//        if let school = schoolsViewModel.schoolSectionList?[indexPath.section].schools[indexPath.item] {
-//
-//            var schoolSAT: SchoolSAT?
-//            if (schoolsViewModel.schoolSectionList?[indexPath.section].schoolsSAT.count)! > indexPath.item
-//                ,let schoolSATItem = schoolsViewModel.schoolSectionList?[indexPath.section].schoolsSAT[indexPath.item] {
-//                schoolSAT = schoolSATItem
-//            }
-//
-//            let schoolDetailVC = SchoolDetailCollectionViewController()
-//            schoolDetailVC.populate(school: school, schoolSAT: schoolSAT)
-//
-//            navigationController?.pushViewController(schoolDetailVC, animated: true)
-//        }
+        let book = isBooksSelected ? bookViewModel.books[indexPath.item] : bookViewModel.savedBooks[indexPath.item]
+
+        let bookDetailVC = BookStoreDetailCollectionViewController()
+        bookDetailVC.populate(book: book, bookStoreCollectionDelegate: self, isFav: !isBooksSelected || self.bookViewModel.savedBooks.contains(where: { $0.id == book.id }))
+        
+        navigationController?.pushViewController(bookDetailVC, animated: true)
     }
 }
 
@@ -226,5 +232,28 @@ extension BookStoreCollectionViewController {
     
     func removeStateView() {
         collectionView?.backgroundView = nil
+    }
+}
+
+extension BookStoreCollectionViewController: BookStoreCollectionDelegate {
+    func addSavedBook(book: BookStore) {
+        bookViewModel.addSavedBook(book: book)
+
+        let bookData = DataManager.shared.book(book: book)
+        booksData.append(bookData)
+        DataManager.shared.save()
+
+        self.collectionView?.reloadData()
+    }
+    
+    func removeSavedBook(book: BookStore) {
+        bookViewModel.removeSavedBook(book: book)
+
+        if let bookData = booksData.first(where: {$0.id == book.id}) {
+            DataManager.shared.deleteBook(book: bookData)
+            booksData.removeAll(where: { $0.id == bookData.id })
+        }
+
+        self.collectionView?.reloadData()
     }
 }
