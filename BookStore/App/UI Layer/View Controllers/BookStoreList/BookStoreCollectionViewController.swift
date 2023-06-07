@@ -121,13 +121,14 @@ class BookStoreCollectionViewController: UIViewController {
     }
     
     private func setupCollectionView() {
+        setupSegmentControl()
+
+        // setup and customize flow layout
         let collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.itemSize = CGSize(width: view.frame.size.width, height: Constants.cellHeight)
         collectionViewLayout.headerReferenceSize = CGSize(width: view.frame.size.width, height: Constants.sectionHeight)
         collectionViewLayout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: collectionViewLayout)
-        
-        setupSegmentControl()
         
         guard let collectionView = collectionView else { return }
         
@@ -136,7 +137,7 @@ class BookStoreCollectionViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
 
-        // setup and customize flow layout
+        // register cells + delegate + dataSource
         collectionView.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -185,6 +186,7 @@ class BookStoreCollectionViewController: UIViewController {
     }
 }
 
+// DataSource
 extension BookStoreCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return isBooksSelected ? bookViewModel.books.count : bookViewModel.savedBooks.count
@@ -209,33 +211,18 @@ extension BookStoreCollectionViewController: UICollectionViewDataSource {
     }
 }
 
+// Delegates
 extension BookStoreCollectionViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let book = isBooksSelected ? bookViewModel.books[indexPath.item] : bookViewModel.savedBooks[indexPath.item]
 
         let bookDetailVC = BookStoreDetailCollectionViewController()
-        bookDetailVC.populate(book: book, bookStoreCollectionDelegate: self, isFav: !isBooksSelected || self.bookViewModel.savedBooks.contains(where: { $0.id == book.id }))
+        bookDetailVC.populate(book: book,
+                              bookStoreCollectionDelegate: self,
+                              isFav: !isBooksSelected || self.bookViewModel.savedBooks.contains(where: { $0.id == book.id }))
         
         navigationController?.pushViewController(bookDetailVC, animated: true)
-    }
-}
-
-extension BookStoreCollectionViewController {
-    func showErrorState(_ errorMessage: String? = "") {
-        let errorStateView = BookStoreListStateView(forAutoLayout: ())
-        errorStateView.update(for: .error)
-        collectionView?.backgroundView = errorStateView
-    }
-
-    func showEmptyState(_ emptyMessage: String? = "") {
-        let emptyStateView = BookStoreListStateView(forAutoLayout: ())
-        emptyStateView.update(for: .empty)
-        collectionView?.backgroundView = emptyStateView
-    }
-    
-    func removeStateView() {
-        collectionView?.backgroundView = nil
     }
 }
 
@@ -254,14 +241,30 @@ extension BookStoreCollectionViewController: BookStoreCollectionDelegate {
     
     func removeSavedBook(book: BookStore) {
         bookViewModel.removeSavedBook(book: book)
-        
-        DispatchQueue.main.async {
-            if let bookData = booksData.first(where: {$0.id == book.id}) {
-                DataManager.shared.deleteBook(book: bookData)
-                booksData.removeAll(where: { $0.id == bookData.id })
-            }
+
+        if let bookData = booksData.first(where: {$0.id == book.id}) {
+            DataManager.shared.deleteBook(book: bookData)
+            booksData.removeAll(where: { $0.id == bookData.id })
         }
 
         self.collectionView?.reloadData()
+    }
+}
+
+extension BookStoreCollectionViewController {
+    func showErrorState(_ errorMessage: String? = "") {
+        let errorStateView = BookStoreListStateView(forAutoLayout: ())
+        errorStateView.update(for: .error)
+        collectionView?.backgroundView = errorStateView
+    }
+
+    func showEmptyState(_ emptyMessage: String? = "") {
+        let emptyStateView = BookStoreListStateView(forAutoLayout: ())
+        emptyStateView.update(for: .empty)
+        collectionView?.backgroundView = emptyStateView
+    }
+    
+    func removeStateView() {
+        collectionView?.backgroundView = nil
     }
 }
