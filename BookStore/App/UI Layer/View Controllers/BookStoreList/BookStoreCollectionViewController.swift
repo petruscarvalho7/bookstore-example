@@ -242,20 +242,24 @@ extension BookStoreCollectionViewController {
 extension BookStoreCollectionViewController: BookStoreCollectionDelegate {
     func addSavedBook(book: BookStore) {
         bookViewModel.addSavedBook(book: book)
-
-        let bookData = DataManager.shared.book(book: book)
-        booksData.append(bookData)
-        DataManager.shared.save()
+        
+        DispatchQueue.main.async {
+            let bookData = DataManager.shared.book(book: book)
+            booksData.append(bookData)
+            DataManager.shared.save()
+        }
 
         self.collectionView?.reloadData()
     }
     
     func removeSavedBook(book: BookStore) {
         bookViewModel.removeSavedBook(book: book)
-
-        if let bookData = booksData.first(where: {$0.id == book.id}) {
-            DataManager.shared.deleteBook(book: bookData)
-            booksData.removeAll(where: { $0.id == bookData.id })
+        
+        DispatchQueue.main.async {
+            if let bookData = booksData.first(where: {$0.id == book.id}) {
+                DataManager.shared.deleteBook(book: bookData)
+                booksData.removeAll(where: { $0.id == bookData.id })
+            }
         }
 
         self.collectionView?.reloadData()

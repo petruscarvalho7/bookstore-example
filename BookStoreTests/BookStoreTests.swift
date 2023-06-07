@@ -71,7 +71,7 @@ final class BookStoreTests: XCTestCase {
                 if books.isEmpty {
                     XCTFail("it doesn't receive any values")
                 }
-                XCTAssertTrue(books.isEmpty == false, "expected books must be with values")
+                XCTAssertTrue(books.isEmpty == false, "expected books must be with values returned.")
                 expectation.fulfill()
             }
             .store(in: &cancelables)
